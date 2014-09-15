@@ -477,7 +477,10 @@ let compose_pair (p:(('b -> 'c) * ('a -> 'b))) : 'a -> 'c =
 (* 3) use compose pair *)
 
 let apply_pair (p:(('a -> 'b) * ('b -> 'c))) : 'a -> 'c = 
-failwith "compose_pair unimplemented"
+ begin match p with 
+  | (ab, bc) -> compose_pair (bc, ab)
+  |_ -> failwith "Unable to apply pair. Check your inputs and see if the types correspond correctly"
+ end
 
 
 (******************************************************************************)
