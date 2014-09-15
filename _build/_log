@@ -1,0 +1,42 @@
+### Starting build.
+# Target: main.ml.depends, tags: { extension:ml, file:main.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules main.ml > main.ml.depends # cached
+# Target: assert.ml.depends, tags: { extension:ml, file:assert.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules assert.ml > assert.ml.depends # cached
+# Target: assert.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:assert.cmo, file:assert.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o assert.cmo assert.ml # cached
+# Target: gradedtests.ml.depends, tags: { extension:ml, file:gradedtests.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules gradedtests.ml > gradedtests.ml.depends # cached
+# Target: hellocaml.ml.depends, tags: { extension:ml, file:hellocaml.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules hellocaml.ml > hellocaml.ml.depends
+# Target: hellocaml.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:hellocaml.cmo, file:hellocaml.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o hellocaml.cmo hellocaml.ml
++ /usr/bin/ocamlc.opt -c -o hellocaml.cmo hellocaml.ml
+File "hellocaml.ml", line 463, characters 4-5:
+Warning 11: this match case is unused.
+# Target: providedtests.ml.depends, tags: { extension:ml, file:providedtests.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules providedtests.ml > providedtests.ml.depends # cached
+# Target: gradedtests.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:gradedtests.cmo, file:gradedtests.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o gradedtests.cmo gradedtests.ml
+# Target: providedtests.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:providedtests.cmo, file:providedtests.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o providedtests.cmo providedtests.ml
+# Target: main.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:main.cmo, file:main.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o main.cmo main.ml
+# Target: assert.cmx, tags: { compile, extension:cmx, extension:ml, file:assert.cmx, file:assert.ml, implem, native, ocaml, quiet }
+/usr/bin/ocamlopt.opt -c -o assert.cmx assert.ml # cached
+# Target: hellocaml.cmx, tags: { compile, extension:cmx, extension:ml, file:hellocaml.cmx, file:hellocaml.ml, implem, native, ocaml, quiet }
+/usr/bin/ocamlopt.opt -c -o hellocaml.cmx hellocaml.ml
++ /usr/bin/ocamlopt.opt -c -o hellocaml.cmx hellocaml.ml
+File "hellocaml.ml", line 463, characters 4-5:
+Warning 11: this match case is unused.
+# Target: gradedtests.cmx, tags: { compile, extension:cmx, extension:ml, file:gradedtests.cmx, file:gradedtests.ml, implem, native, ocaml, quiet }
+/usr/bin/ocamlopt.opt -c -o gradedtests.cmx gradedtests.ml
+# Target: providedtests.cmx, tags: { compile, extension:cmx, extension:ml, file:providedtests.cmx, file:providedtests.ml, implem, native, ocaml, quiet }
+/usr/bin/ocamlopt.opt -c -o providedtests.cmx providedtests.ml
+# Target: main.cmx, tags: { compile, extension:cmx, extension:ml, file:main.cmx, file:main.ml, implem, native, ocaml, quiet }
+/usr/bin/ocamlopt.opt -c -o main.cmx main.ml
+# Target: main.native, tags: { dont_link_with, extension:native, file:main.native, link, native, ocaml, program, quiet }
+/usr/bin/ocamlopt.opt assert.cmx hellocaml.cmx gradedtests.cmx providedtests.cmx main.cmx -o main.native
+# Target: main.byte, tags: { byte, dont_link_with, extension:byte, file:main.byte, link, ocaml, program, quiet }
+/usr/bin/ocamlc.opt assert.cmo hellocaml.cmo gradedtests.cmo providedtests.cmo main.cmo -o main.byte
+# Compilation successful.

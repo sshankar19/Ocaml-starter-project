@@ -1,0 +1,187 @@
+This file provides instructions for compiling and running your project
+code. The compilation of the project will be done using OCaml suite of
+tools (including ocaml, ocamlc, ocamllex, and ocamlyacc).
+
+Note: We have tested this project infrastructure code only on OCaml
+versions 3.12 an higher. We recommend using OCaml version-3.12 or 4.0.
+
+Instructions:
+
+(1) We recommend using a version control system such as svn, git or
+cvs to maintain your source code.
+
+(2) Check your OCaml version
+
+Type ocaml at your prompt and you should see something similar to what is shown below.
+
+bash-3.2$ ocaml
+          OCaml version 4.01.0
+
+# 
+
+Your compiler will (eventually) output assembly code that we will
+process using gcc compiler.
+
+(3) Compiling your projects
+
+To compile your projects, use the ocamlbuild tool. The ocamlbuild can
+generate bytecode (for use in the interactive toplevel) or native code
+(for better performance).
+
+Go to the directory containing the project source and run the
+following command:
+
+$ ocamlbuild main.native main.byte
+
+
+(4) Running your projects and testing them
+
+After compiling your project, you can run it from the command line by
+executing either the native or bytecode version.
+
+The projects in this course are designed to have a single, top-level
+entry point in the file main.ml. When compiled by ocamlbuild, the
+resulting executables are main.native and main.byte
+
+The project also has a test harness that can be used with a variety of
+switches and command-line arguments. You can always check which
+command-line switches are available by using the -help or --help
+flags. Project1 supports only one interesting command-line option
+--test.
+
+$./main.native -help
+Fall 2014 CS 515 main test harness 
+
+  --test run the test suite, ignoring other inputs
+  -help  Display this list of options
+  --help  Display this list of options
+
+All of the projects in this course will support the --test option,
+which will simplfy run the project's unit tests, print a summary of
+the results and then exit. It will give output something like below to
+indicate how much of the project you have completed. The output below
+is a generic sample for the projects you will see in this course and
+may not exactly match the output you would see when you compile.
+
+$./main.native --test
+
+Student-Provided Tests For Problem 1-3:
+  case1: failed - Problem 3 case1 test unimplemented
+  case2: failed - Problem 3 case2 test unimplemented
+  case3: failed - not equal
+Problem1-1 (0/3 points)
+  pieces: failed - not equal
+  fourthpower0: failed - unimplemented
+  fourthpower1: failed - unimplemented
+  fourthpower2: failed - unimplemented
+  fourthpower3: failed - unimplemented
+Problem1-2 (0/3 points)
+  cents_of1: failed - cents_of unimplemented
+  cents_of2: failed - cents_of unimplemented
+  cents_of3: failed - cents_of unimplemented
+  cents_of4: failed - cents_of unimplemented
+  cents_of5: failed - cents_of unimplemented
+  cents_of6: failed - cents_of unimplemented
+  cents_of7: failed - cents_of unimplemented
+Problem1-3 (??/3 points):
+  Hidden
+Problem2-1 (0/3 points)
+  third_of_three1: failed - third_of_three unimplemented
+  third_of_three2: failed - third_of_three unimplemented
+  third_of_three3: failed - third_of_three unimplemented
+Problem2-1Manual (??/3 points):
+  Hidden
+Problem2-2 (0/5 points)
+  compose_pair1: failed - compose_pair unimplemented
+  compose_pair2: failed - compose_pair unimplemented
+  compose_pair3: failed - compose_pair unimplemented
+Problem2-3 (0/5 points)
+  apply_pair1: failed - compose_pair unimplemented
+  apply_pair2: failed - compose_pair unimplemented
+  apply_pair3: failed - compose_pair unimplemented
+Problem3-1 (0/5 points)
+  list_to_mylist1: failed - list_to_mylist unimplemented
+  list_to_mylist2: failed - list_to_mylist unimplemented
+  list_to_mylist3: failed - list_to_mylist unimplemented
+  list_to_mylist4: failed - list_to_mylist unimplemented
+Problem3-2 (0/5 points)
+  append1: failed - append unimplemented
+  append2: failed - append unimplemented
+  append3: failed - append unimplemented
+  append4: failed - append unimplemented
+  append5: failed - append unimplemented
+  append6: failed - append unimplemented
+  append7: failed - append unimplemented
+Problem3-3 (0/5 points)
+  rev1: failed - rev unimplemented
+  rev2: failed - rev unimplemented
+  rev3: failed - rev unimplemented
+  rev4: failed - rev unimplemented
+Problem3-4 (0/5 points)
+  rev_t1: failed - rev_t unimplemented
+  rev_t2: failed - rev_t unimplemented
+  rev_t3: failed - rev_t unimplemented
+  rev_t4: failed - rev_t unimplemented
+Problem3-4Manual (??/5 points):
+  Hidden
+Problem3-5 (0/5 points)
+  insert1: failed - insert unimplemented
+  insert2: failed - insert unimplemented
+  insert3: failed - insert unimplemented
+  insert4: failed - insert unimplemented
+  insert5: failed - insert unimplemented
+  insert6: failed - insert unimplemented
+Problem3-6 (0/5 points)
+  union1: failed - union unimplemented
+  union2: failed - union unimplemented
+  union3: failed - union unimplemented
+  union4: failed - union unimplemented
+  union5: failed - union unimplemented
+  union6: failed - union unimplemented
+  union7: failed - union unimplemented
+  union8: failed - union unimplemented
+Problem3-6 (0/5 points)
+  union1: failed - union unimplemented
+  union2: failed - union unimplemented
+  union3: failed - union unimplemented
+  union4: failed - union unimplemented
+  union5: failed - union unimplemented
+  union6: failed - union unimplemented
+  union7: failed - union unimplemented
+  union8: failed - union unimplemented
+Problem3-7 (0/5 points)
+  msort1: failed - msort unimplemented
+  msort2: failed - msort unimplemented
+  msort3: failed - msort unimplemented
+  msort4: failed - msort unimplemented
+Problem4-1 (0/5 points)
+  vars_of1: failed - vars_of unimplemented
+  vars_of2: failed - vars_of unimplemented
+  vars_of3: failed - vars_of unimplemented
+Problem4-2 (0/5 points)
+  lookup1: failed - unimplemented
+  lookup2: failed - unimplemented
+  lookup3: failed - unimplemented
+  lookup4: failed - unimplemented
+  lookup5: failed - unimplemented
+Problem4-3 (0/5 points)
+  interpret1: failed - unimplemented
+  interpret2: failed - unimplemented
+  interpret3: failed - unimplemented
+Problem4-3harder (??/5 points):
+  Hidden
+Problem4-4 (0/5 points)
+  optimize1: failed - optimize unimplemented
+  optimize2: failed - optimize unimplemented
+  optimize3: failed - optimize unimplemented
+Problem4-4harder (??/5 points):
+  Hidden
+Problem4-4hardest (??/5 points):
+  Hidden
+Problem5 (??/5 points):
+  Hidden
+StyleManual (??/5 points):
+  Hidden
+---------------------------------------------------
+Passed: 0/83
+Failed: 83/83

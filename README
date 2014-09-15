@@ -1,0 +1,41 @@
+
+This project provides an introduction to OCaml programming and some
+warm-up exercises involving tree manipulation and recursive
+programming (both of which will be highly useful when building the
+compiler). It will also familiarize you with the basic workflow of the
+projects in this course, including the testing framework that we will
+use to (partially) automate the grading of your projects.
+
+(1) Assignment submission
+
+Most of the instructions for this project are found as comments in the
+source files. For this project, you should primarily fill the
+hellocaml.ml and submit your directory as project1.tar.gz directory. 
+
+When we execute the following set of commands on a linux box, your
+submission should execute the tests. If you create the tar file in the
+wrong fashion, it may not have the correct directory structure.
+
+tar -zxvf project1.tar.gz
+cd project1
+./ocamlbuild main.native
+./main.native --test
+
+
+Instructions for creating the tar file. Lets say all your project1 materials are in the project1 directory
+
+#ls
+project1
+
+#tar -c project1 > project1.tar
+
+#gzip project1.tar
+
+The last command should create project1.tar.gz
+
+(2) Grading
+ 
+You will get no credit if your submitted program does not compile.
+Apart from the test already given, we will run some hidden tests. Your
+points will be 65% for passing the given tests (with correctly written
+code) and 35% for the hidden tests.
