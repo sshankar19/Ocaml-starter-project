@@ -472,7 +472,7 @@ let compose_pair (p:(('b -> 'c) * ('a -> 'b))) : 'a -> 'c =
  * you must return a function.  
  *)
 (* so what to do:*)
-(* 1) need to break down (deconstruct the tuple) *)
+(* 1) nee sdfd to break down (deconstruct the tuple) *)
 (* 2) reconstruct the tuple backwards*)
 (* 3) use compose pair *)
 

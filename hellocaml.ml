@@ -456,10 +456,13 @@ let third_of_three (t:'a * 'b *'c) : 'c =
  * for examples of its use.
  *)
 
+
 let compose_pair (p:(('b -> 'c) * ('a -> 'b))) : 'a -> 'c =
 		begin match p with
-			| (x, y) -> fun(z) -> y (x z)
+			| (bc, ab) -> (fun(final) -> bc ( ab final)) (** final is the input parameter ('a) for the final function. ab final means that ab takes final as it's first param and resolves to 'b (from it's function). bc means it takes the b' from the previously resolved entry and then plugs it in for IT's first param and solves for 'c. That is what is outputted *)
+			|_ -> failwith "Unable to compose pair. Check your inputs and see if the types correspond correctly please."
 		end
+
 
 (*
  * Problem 2-3
@@ -468,9 +471,16 @@ let compose_pair (p:(('b -> 'c) * ('a -> 'b))) : 'a -> 'c =
  * a pair of functions and applies them according to the types.  Note that
  * you must return a function.  
  *)
+(* so what to do:*)
+(* 1) nee sdfd to break down (deconstruct the tuple) *)
+(* 2) reconstruct the tuple backwards*)
+(* 3) use compose pair *)
 
 let apply_pair (p:(('a -> 'b) * ('b -> 'c))) : 'a -> 'c = 
-failwith "compose_pair unimplemented"
+ begin match p with 
+  | (ab, bc) -> compose_pair (bc, ab)
+  |_ -> failwith "Unable to apply pair. Check your inputs and see if the types correspond correctly"
+ end
 
 
 (******************************************************************************)
