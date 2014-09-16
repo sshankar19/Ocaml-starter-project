@@ -727,8 +727,16 @@ let rev_t (l: 'a list) : 'a list =
  * to either the value computed by e1 or the value computed by e2
  * depending on whether t evaluates to true or false.
  *)
+
 let rec insert (x:'a) (l:'a list) : 'a list =
-failwith "insert unimplemented"
+	begin match l with 
+	| [] -> [x]
+	| h::tl -> 
+			if x = h then h::tl
+			else
+				if x < h then x::h::tl
+				else h::insert x tl
+	end
   
   
 (*
@@ -740,7 +748,10 @@ failwith "insert unimplemented"
  * insert function that you just defined.
  *)
 let rec union (l1:'a list) (l2:'a list) : 'a list =
- failwith "union unimplemented"
+ begin match l1 with
+	|	[] -> l2
+	| h::tl -> union tl (insert h l2)
+ end
 
 (*
  * Problem 3-7
