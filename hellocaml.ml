@@ -653,7 +653,10 @@ let rec mylist_to_list (l:'a mylist) : 'a list =
  * the inverse of the mylist_to_list function given above.
  *)
 let rec list_to_mylist (l:'a list) : 'a mylist =
-failwith "list_to_mylist unimplemented"
+	  begin match l with
+    | [] -> Nil
+    | h::tl -> Cons(h, list_to_mylist tl)
+  end
 
 
 (*
@@ -671,7 +674,10 @@ failwith "list_to_mylist unimplemented"
  * ([1;2] @ [3]).
  *) 
 let rec append (l1:'a list) (l2:'a list) : 'a list =
-failwith "append unimplemented"
+	begin match l1 with
+	| [] -> l2
+	| h::tl -> h::(append tl l2)
+	end
   
 (*
  * Problem 3-3
@@ -681,7 +687,10 @@ failwith "append unimplemented"
  * the library function.
  *)
 let rec rev (l:'a list) : 'a list =
-failwith "rev unimplemented"
+	begin match l with
+	| [] -> []
+	| h::tl -> append (rev tl) (h::[])
+ 	end
 
 (*
  * Problem 3-4
@@ -694,8 +703,14 @@ failwith "rev unimplemented"
  * Tail recursion is imporant to efficiency -- OCaml will compile
  * a tail recursive function to a simple loop.
  *)
+let rec loop (accum: 'a list) (l: 'a list) =
+	begin match l with
+		| [] -> accum
+		| h::tl -> loop (h::accum) tl
+	end
+
 let rev_t (l: 'a list) : 'a list =
-failwith "rev_t unimplemented"
+	loop [] l
 
 
 (*
