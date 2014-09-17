@@ -772,14 +772,30 @@ let rec insertWithDups (x:'a) (l:'a list) : 'a list =
 				else h::insert x tl
 	end
 	
+			
 let rec unionWithDups (l1:'a list) (l2:'a list) : 'a list =
  begin match l1 with
 	|	[] -> l2
 	| h::tl -> unionWithDups tl (insert h l2)
  end	
 
+(* how to split*)
+(* what can I do?*)
+(* I can recurse through and cons.*)
+(* how do  *)
+
+let rec lengthHel(l: 'a list) (accum: int) =
+	begin match l with
+	| [] -> accum
+	| h::tl -> lengthHel tl (accum+1)
+	end
+	
+let length (l: 'a list): int = 
+	lengthHel l 0
+	
 let rec msort (l: 'a list): 'a list  = 
-  failwith "msort unimplemented"
+  failwith "undone"
+	
                               
                                                   
 (******************************************************************************)
