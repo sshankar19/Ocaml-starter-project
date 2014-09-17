@@ -769,32 +769,53 @@ let rec insertWithDups (x:'a) (l:'a list) : 'a list =
 	| [] -> [x]
 	| h::tl -> 
 				if x < h then x::h::tl
-				else h::insert x tl
+				else h::insertWithDups x tl
 	end
 	
-			
 let rec unionWithDups (l1:'a list) (l2:'a list) : 'a list =
  begin match l1 with
 	|	[] -> l2
-	| h::tl -> unionWithDups tl (insert h l2)
+	| h::tl -> unionWithDups tl (insertWithDups h l2)
  end	
 
-(* how to split*)
-(* what can I do?*)
-(* I can recurse through and cons.*)
-(* how do  *)
-
-let rec lengthHel(l: 'a list) (accum: int) =
+let rec lengthHel(l: 'a list) (accum: int): int =
 	begin match l with
 	| [] -> accum
 	| h::tl -> lengthHel tl (accum+1)
 	end
 	
-let length (l: 'a list): int = 
-	lengthHel l 0
+let length (l: 'a list): int = lengthHel l 0
+	
+let middle (l: 'a list): int = (length l)/2
+
+
+let rec subHelper (l: 'a list) (beg: int) (fin: int) (sub: 'a list) : 'a list =
+	if beg >= fin then (* non inclusive for first half *)
+		sub
+	else
+		begin match l with
+		| [] -> failwith "I haven't really thought this through"(* empty l? or an error? *)
+		| h::tl -> subHelper tl (beg+1) fin (append sub [h])
+		end
+		
+let rec traverser	(l: 'a list) (mid: int) (counter: int): 'a list = 
+	begin match l with
+	| [] -> []
+	| h::tl -> 
+		if counter = mid (* if the counter is position is at mid, this would mean that the lookahead is on h*)
+			then h::tl
+		else
+			traverser tl mid (counter+1)
+	end
 	
 let rec msort (l: 'a list): 'a list  = 
-  failwith "undone"
+  if length l <= 1
+		then l
+	else
+		unionWithDups
+			(msort(subHelper l 0 (middle l) [])) 
+			(msort(subHelper (traverser l (middle l) 0) (middle l) (length l) [])) 
+				
 	
                               
                                                   
@@ -882,9 +903,15 @@ let e3 : exp = Mult(Var "y", Mult(e2, Neg e2))     (* "y * ((x+1) * -(x+1))" *)
  * Hint: you need to pattern match on the exp e.
  * Hint: you probably want to use the 'union' function you wrote for Problem 3-5.
  *)
-let rec vars_of (e:exp) : string list =
-failwith "vars_of unimplemented"
 
+let rec vars_of (e:exp) : string list =
+	begin match e with
+	| Var x -> union [x] []
+	| Add(x , y) -> union (vars_of x) (vars_of y)
+	| Mult(x , y) -> union (vars_of x) (vars_of y)
+	| Neg x -> vars_of x
+	| Const x -> []
+	end 
 
 (*
  * How should we interpret (i.e. give meaning to) an expression?
@@ -946,7 +973,14 @@ let ctxt2 : ctxt = [("x", 2l); ("y", 7l)]  (* maps "x" to 2l, "y" to 7l *)
  * raise the Not_found exception 
  *)
 let rec lookup (x:string) (c:ctxt) : int32 =
-failwith "unimplemented"
+	begin match c with
+	| [] -> raise Not_found
+	| h::tl ->
+		let (a, y) = h in
+			if a = x then y
+			else
+				lookup x tl
+	end
 
 
 
