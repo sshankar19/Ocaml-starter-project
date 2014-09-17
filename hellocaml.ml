@@ -1009,9 +1009,23 @@ let rec lookup (x:string) (c:ctxt) : int32 =
  * those provided in gradedtests.ml.
  *)        
 
-let rec interpret (c:ctxt) (e:exp) : int32 =
-  failwith "unimplemented"
 
+(*
+ * Go through the expression. Find the corresponding vals (lookup)
+ * Add them in myself.
+ *
+ * REMEMBER TO TEST OUT CONST X TEST CASE AND NEG X TEST CASE AS WELL AS DO
+ * OTHER MISC TESTS
+ *)
+
+let rec interpret (c:ctxt) (e:exp) : int32 =
+  begin match e with
+	  | Var x -> lookup x c
+	  | Add(x , y) -> Int32.add (interpret c x) (interpret c y)
+	  | Mult(x , y) -> Int32.mul (interpret c x)  (interpret c y)
+    | Neg x -> Int32.neg (interpret c x)
+	  | Const x -> x
+  end
 
 (*
  * Problem 4-4
