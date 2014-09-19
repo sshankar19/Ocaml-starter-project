@@ -460,7 +460,7 @@ let third_of_three (t:'a * 'b *'c) : 'c =
 let compose_pair (p:(('b -> 'c) * ('a -> 'b))) : 'a -> 'c =
 		begin match p with
 			| (bc, ab) -> (fun(final) -> bc ( ab final)) (** final is the input parameter ('a) for the final function. ab final means that ab takes final as it's first param and resolves to 'b (from it's function). bc means it takes the b' from the previously resolved entry and then plugs it in for IT's first param and solves for 'c. That is what is outputted *)
-			|_ -> failwith "Unable to compose pair. Check your inputs and see if the types correspond correctly please."
+			(*|_ -> failwith "Unable to compose pair. Check your inputs and see if the types correspond correctly please." *)
 		end
 
 
@@ -479,7 +479,7 @@ let compose_pair (p:(('b -> 'c) * ('a -> 'b))) : 'a -> 'c =
 let apply_pair (p:(('a -> 'b) * ('b -> 'c))) : 'a -> 'c = 
  begin match p with 
   | (ab, bc) -> compose_pair (bc, ab)
-  |_ -> failwith "Unable to apply pair. Check your inputs and see if the types correspond correctly"
+  (*|_ -> failwith "Unable to apply pair. Check your inputs and see if the types correspond correctly" *)
  end
 
 
@@ -1062,10 +1062,47 @@ let rec interpret (c:ctxt) (e:exp) : int32 =
  *       that provides bindings for all of the expression's variables
  *   (2) recursively reduces the size of the expression in "obvious" cases 
  *         -- adding 0, multiplying by 0 or 1, constants, etc.
- *)   
+	  | Var x -> Can't optimize this. It's not an expression
+	  | Add(x , y) -> Int32.add (interpret c x) (interpret c y)
+	  | Mult(x , y) -> Int32.mul (interpret c x)  (interpret c y)
+    | Neg x -> Int32.neg (interpret c x)
+	  | Const x -> x
+
+ *) 
+  
+(* Optimizations:*)
+(* Check this pattern matching if it works *)
+(* 1) adding 0*)
+(* 2) multiplying by 0*)
+(* 3) Performing operations on constants*)
+(* 4) two vars that are the same in a subtraction? (Might not be able to do this as negation is within another bracket) *) 
 
 let rec optimize (e:exp) : exp =
-failwith "optimize unimplemented"  
+	begin match e with
+	| Var x -> Var x
+	| Add(Const x, Const y) -> Const (Int32.add x y)
+	| Add(x, Const 0l) -> optimize x
+	| Add(Const 0l, y) -> optimize y
+	| Add(x , y) -> let z = Add(optimize x, optimize y) in
+											if z = e then z
+											else
+												optimize z
+	| Mult(x, Const 0l) -> Const 0l
+	| Mult(Const 0l, y) -> Const 0l
+	| Mult(Const x, Const y) -> Const (Int32.mul x y)
+	| Mult(x, Const 1l) -> optimize x
+	| Mult(Const 1l, y) -> optimize y
+	| Mult(x, y) -> let z = Mult ((optimize x),(optimize y)) in
+		 									if z = e then z
+		 									else 
+												optimize z
+	| Neg x -> begin match x with
+							| Neg y -> optimize y
+							| Const y -> Const (Int32.mul y (-1l))
+							|	y	-> Neg (optimize y)
+							end
+	| Const x -> Const x 
+	end 
   
 
 (*
