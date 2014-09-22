@@ -747,9 +747,16 @@ let rec insert (x:'a) (l:'a list) : 'a list =
  * both of the two input lists.  Hint: you might want to use the 
  * insert function that you just defined.
  *)
+let rec removeDups (l1: 'a list) (l2: 'a list) : 'a list = 
+	begin match l1 with 
+	| [] -> l2
+  | h::tl -> removeDups tl (insert h l2)
+		
+	end
+
 let rec union (l1:'a list) (l2:'a list) : 'a list =
  begin match l1 with
-	|	[] -> l2
+	|	[] -> removeDups l2 []
 	| h::tl -> union tl (insert h l2)
  end
 
@@ -885,7 +892,7 @@ let e2 : exp = Add(Var "x", Const 1l)    (* "x + 1" *)
 (*
  * Here is a more complex expression that involves multiple variables:
  *)
-let e3 : exp = Mult(Var "y", Mult(e2, Neg e2))     (* "y * ((x+1) * -(x+1))" *)
+  let e3 : exp = Mult(Var "y", Mult(e2, Neg e2))     (* "y * ((x+1) * -(x+1))" *)
 
 (*
  *  Problem 4-1
@@ -1249,8 +1256,13 @@ let ans1 = run [] p1
  *    function to glue together two programs.
  *)
 let rec compile (e:exp) : program =
- failwith "compile unimplemented"  
-
+	begin match e with
+	| Var x	-> [IPushV x]
+	| Const x -> [IPushC x]
+	| Add(x ,y)-> (compile x) @ (compile y) @ [IAdd]
+	| Mult (x, y) -> (compile x) @ (compile y) @ [IMul]
+	| Neg x -> (compile x) @ [INeg]
+	end
 
 
 (************)

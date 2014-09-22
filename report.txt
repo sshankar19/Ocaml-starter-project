@@ -1,10 +1,10 @@
 Identification:
   
-<RUID>;<netid>;<name>;<email>
+139006417;sns106;Shashank Shankar; sshankar19@gmail.com
 
 
 Known issues with your implementation:
-
+None.
 
 
 ------------------------
@@ -12,25 +12,16 @@ Course Project Feedback:
 ------------------------
 
 1.  How much time did it take to complete this project?
-
+About a week, a couple hours a day (5 days, 5 parts).
 
 2. How effective was this project? [0-10]: 
-
-    0 = learned nothing
-   10 = highly educational
+10.
 
 3. How engaging was this project? [0-10]:
-
-    0 = tedious and boring
-   10 = fun and engaging
+10
 
 4. How difficult was this project? [0-10]:
+4.
 
-    0 = piece of cake
-   10 = extremely hard
-
-   (note that hard is not necessarily bad, 
-    if it's "hard" as in "challenging")
-
-[Feel free to add comments about this project]
+I think the language is very cool and I'm excited to work in it some more.
 
